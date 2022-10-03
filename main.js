@@ -31,6 +31,12 @@ let draw = () => {
     if (x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
         dx = -dx;
     }
+
+    if (rightPressed && paddleX < canvas.width-paddleWidth) {
+        paddleX += 7;
+    } else if (leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
 };
 
 let drawPaddle = () => {
@@ -41,6 +47,26 @@ let drawPaddle = () => {
     ctx.closePath();
 };
 
+let keyDownHandler = (e) => {
+    if (e.keyCode == 39) {
+        rightPressed = true;
+    }
+    if (e.keyCode == 37) {
+        leftPressed = true;
+    }
+};
+
+let keyUpHandler = (e) => {
+    if (e.keyCode == 39) {
+        rightPressed = false;
+    }
+    if (e.keyCode == 37) {
+        leftPressed = false;
+    }
+};
+
 document.addEventListener('DOMContentLoaded', ()=>{
+    document.addEventListener('keydown', keyDownHandler, false);
+    document.addEventListener('keyup', keyUpHandler, false);
     setInterval(draw, 10);
 });
