@@ -129,6 +129,13 @@ let keyUpHandler = (e) => {
     }
 };
 
+let mouseMoveHandler = (e) => {
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        relativeX = relativeX - paddleWidth / 2;
+    }
+};
+
 let collisionDetection = () => {
     for (let column = 0; column < brickColumnCount; column++) {
         for (let row = 0; row < brickRowCount; row++) {
@@ -136,7 +143,8 @@ let collisionDetection = () => {
             if (x > brick.x && 
                 x < brick.x + brickWidth && 
                 y > brick.y && 
-                y < brick.y + brickHeight) {
+                y < brick.y + brickHeight &&
+                brick.status == 1) {
                 dy = -dy;
                 brick.status = 0;
                 score += 100;
