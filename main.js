@@ -30,10 +30,12 @@ for (let column = 0; column < brickColumnCount; column++) {
     for (let row = 0; row < brickRowCount; row++) {
         bricks[column][row] = { 
             x: 0, 
-            y: 0 
+            y: 0,
+            status: 1 
         };
     }
 }
+let score = 0;
 
 /* отрисовка мяча */
 let drawBall = () => {
@@ -50,6 +52,8 @@ let draw = () => {
     drawBricks(); // рисуем кирпичи
     drawBall(); // отрисовывает мяч
     drawPaddle(); // отрисовываем плашку
+    collisionDetection(); // мониторим столкновения с кирпичами
+    drawScore(); // счет
     x += dx; // изменяем координаты
     y += dy;
 
@@ -90,15 +94,17 @@ let drawPaddle = () => {
 let drawBricks = () => {
     for (let column = 0; column < brickColumnCount; column++) {
         for (let row = 0; row < brickRowCount; row++) {
-            let brickX = (column * (brickWidth + brickPadding)) + brickOffsetLeft;
-            let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop;
-            bricks[column][row].x = brickX;
-            bricks[column][row].y = brickY;
-            ctx.beginPath();
-            ctx.rect(brickX, brickY, brickWidth, brickHeight);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
+            if (bricks[column][row].status == 1) {
+                let brickX = (column * (brickWidth + brickPadding)) + brickOffsetLeft;
+                let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop;
+                bricks[column][row].x = brickX;
+                bricks[column][row].y = brickY;
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            }
         }
         
     }
@@ -123,8 +129,35 @@ let keyUpHandler = (e) => {
     }
 };
 
+let collisionDetection = () => {
+    for (let column = 0; column < brickColumnCount; column++) {
+        for (let row = 0; row < brickRowCount; row++) {
+            let brick = bricks[column][row];
+            if (x > brick.x && 
+                x < brick.x + brickWidth && 
+                y > brick.y && 
+                y < brick.y + brickHeight) {
+                dy = -dy;
+                brick.status = 0;
+                score += 100;
+                if (score == brickColumnCount * brickRowCount * 100) {
+                    alert("YOU WIN, CONGRATULATIONS!");
+                    document.location.reload();
+                }
+            }
+        }
+    }
+};
+
+let drawScore = () => {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
+};
+
 document.addEventListener('DOMContentLoaded', ()=>{
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
+    document.addEventListener('mousemove', mouseMoveHandler, false);
     interval = setInterval(draw, 10);
 });
