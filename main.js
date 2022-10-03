@@ -41,7 +41,7 @@ let lives = 3;
 let drawBall = () => {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = '#D58A2A';
     ctx.fill();
     ctx.closePath();
 };
@@ -96,7 +96,7 @@ let draw = () => {
 let drawPaddle = () => {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#2D3E44";
     ctx.fill();
     ctx.closePath();
 };
@@ -111,7 +111,7 @@ let drawBricks = () => {
                 bricks[column][row].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = "#9F775A";
                 ctx.fill();
                 ctx.closePath();
             }
