@@ -141,7 +141,14 @@ let keyUpHandler = (e) => {
 
 let mouseMoveHandler = (e) => {
     let relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+    }
+};
+
+let toucheMoveHandler = (e) => {
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
         paddleX = relativeX - paddleWidth/2;
     }
 };
@@ -183,5 +190,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
     document.addEventListener('mousemove', mouseMoveHandler, false);
+    document.addEventListener('touchmove', toucheMoveHandler, false);
     draw();
 });
