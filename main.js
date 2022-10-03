@@ -1,5 +1,4 @@
 /* игровое пространство */
-let interval;
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 /* параметры и координаты мяча + шаг смещения */
@@ -36,6 +35,7 @@ for (let column = 0; column < brickColumnCount; column++) {
     }
 }
 let score = 0;
+let lives = 3;
 
 /* отрисовка мяча */
 let drawBall = () => {
@@ -54,6 +54,7 @@ let draw = () => {
     drawPaddle(); // отрисовываем плашку
     collisionDetection(); // мониторим столкновения с кирпичами
     drawScore(); // счет
+    drawLives();
     x += dx; // изменяем координаты
     y += dy;
 
@@ -65,9 +66,17 @@ let draw = () => {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-            alert('Game Over!');
-            document.location.reload();
-            clearInterval(interval);
+            lives--;
+            if (!lives) {
+                alert("Game Over!\n Your score:"+score);
+                document.location.reload();
+            } else {
+                x = canvas.width / 2;
+                y = canvas.height-30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width-paddleWidth)/2;
+            }
         }
     }
     if (x + dx < ballRadius || x + dx > canvas.width - ballRadius) {
@@ -80,6 +89,7 @@ let draw = () => {
     } else if (leftPressed && paddleX > 0) {
         paddleX -= 7;
     }
+    requestAnimationFrame(draw);
 };
 
 // отрисовка плашки
@@ -163,9 +173,15 @@ let drawScore = () => {
     ctx.fillText("Score: "+score, 8, 20);
 };
 
+let drawLives = () => {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+};
+
 document.addEventListener('DOMContentLoaded', ()=>{
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
     document.addEventListener('mousemove', mouseMoveHandler, false);
-    interval = setInterval(draw, 10);
+    draw();
 });
