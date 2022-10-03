@@ -1,3 +1,4 @@
+let interval;
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 let x = canvas.width/2;
@@ -8,8 +9,8 @@ let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
 let paddleX = (canvas.width-paddleWidth)/2;
-var rightPressed = false;
-var leftPressed = false;
+let rightPressed = false;
+let leftPressed = false;
 
 let drawBall = () => {
     ctx.beginPath();
@@ -25,8 +26,16 @@ let draw = () => {
     drawPaddle();
     x += dx;
     y += dy;
-    if (y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
+    if (y + dy < ballRadius) {
         dy = -dy;
+    } else if (y + dy > canvas.height-ballRadius) {
+        if (x > paddleX && x < paddleX - paddleWidth) {
+            dy = -dy;
+        } else {
+            alert('Game Over!');
+            document.location.reload();
+            clearInterval(interval);
+        }
     }
     if (x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
         dx = -dx;
@@ -68,5 +77,5 @@ let keyUpHandler = (e) => {
 document.addEventListener('DOMContentLoaded', ()=>{
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
-    setInterval(draw, 10);
+    interval = setInterval(draw, 10);
 });
