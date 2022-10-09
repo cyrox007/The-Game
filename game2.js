@@ -21,24 +21,32 @@ function drawFloor() {
     ctx.fill();
     ctx.closePath();
 }
-let dino = new Dino(ctx, startingPositionY);
-let cactus = new Cactus(ctx, startingPositionY, playingFieldWidth);
 
+let dino = new Dino(ctx, startingPositionY);
+let cacti = [];
+for (let index = 0; index < 5; index++) {
+    let cactus = new Cactus(canvas, ctx, startingPositionY, playingFieldHeight);
+    cacti.push(cactus);
+}
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFloor();
     dino.drawDino();
     dino.dinoControll(dinoJumpPress);
-    
-    cactus.cactusSpawn();
-    
+
+    cacti.forEach(el=>{
+        setTimeout(el.cactusSpawn(), 500);
+    });
+
     requestAnimationFrame(draw);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    let soundtrack = document.createElement('audio');
+    soundtrack.setAttribute('src', '/audio/track-1.mp3');
+    document.querySelector('body').prepend(soundtrack);
     
-    
-    draw(dino, cactus);
+    draw();
     document.addEventListener('keydown', (e)=>{
         e.preventDefault();
         if (e.code == 'Space') {

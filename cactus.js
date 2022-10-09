@@ -1,5 +1,6 @@
 class Cactus {
-    constructor (ctx, cactusPositionY, cactusPositionX) {
+    constructor (canvas, ctx, cactusPositionY, cactusPositionX) {
+        this.canvas = canvas;
         this.ctx = ctx;
         this.cactusPositionY = cactusPositionY;
         this.cactusPositionX = cactusPositionX;
@@ -13,6 +14,9 @@ class Cactus {
         }
         
         this.cactusSpawn = function () {
+            if (this.cactusMoving >= this.canvas.clientWidth+20) {
+                this.cactusMoving = 0;
+            }
             this.cactusDraw();
             this.cactusMoving += 3;
         }
