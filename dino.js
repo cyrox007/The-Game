@@ -10,14 +10,13 @@ class Dino {
         this.drawDino = function () {
             let dino = document.getElementById('dino');
             this.ctx.beginPath();
-            this.ctx.drawImage(dino, 100, this.dinoPositionY-this.dinoJumpHeight, 150, 150);
+            this.ctx.drawImage(dino, 100, this.dinoPositionY-this.dinoJumpHeight, 80, 80);
             this.ctx.closePath();
         }
         
         this.dinoControll = function (flag) {
             this.spacePressed = flag;
             if(this.spacePressed) {
-                debugger;
                 this.dinoJumpCount++;
                 this.dinoJumpHeight = 4 * this.dinoJumpLength * Math.sin(Math.PI * this.dinoJumpCount / this.dinoJumpLength);
             }

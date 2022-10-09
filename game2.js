@@ -10,7 +10,7 @@ let playingFieldWidth = canvas.clientWidth;
 let playingFieldHeight = canvas.clientHeight;
 let floorHeight = 20;
 
-let startingPositionY = playingFieldHeight - floorHeight - 130;
+let startingPositionY = playingFieldHeight - floorHeight-80;
 
 let dinoJumpPress = false;
 
@@ -22,13 +22,14 @@ function drawFloor() {
     ctx.closePath();
 }
 let dino = new Dino(ctx, startingPositionY);
-let cactus = new Cactus(startingPositionY, playingFieldWidth);
+let cactus = new Cactus(ctx, startingPositionY, playingFieldWidth);
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFloor();
-    
     dino.drawDino();
     dino.dinoControll(dinoJumpPress);
+    
     cactus.cactusSpawn();
     
     requestAnimationFrame(draw);
