@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Game</title>
     <style>
+        html {
+            overflow-x: hidden;
+        }
         * {
             padding: 0;
             margin: 0;
@@ -15,10 +18,17 @@
             display: block;
             margin: 0 auto;
         }
+        img {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
-    <script src="game.js"></script>
+    <canvas id="myCanvas"></canvas>
+    <img id="dino" src="/img/dino.webp">
+    <img id="cactus" src="/img/cactus.webp">
+    <script src="cactus.js"></script>
+    <script src="dino.js"></script>
+    <script src="game2.js"></script>
 </body>
 </html>
