@@ -21,8 +21,9 @@ function drawFloor() {
     ctx.fill();
     ctx.closePath();
 }
-
-function draw(dino) {
+let dino = new Dino(ctx, startingPositionY);
+let cactus = new Cactus(startingPositionY, playingFieldWidth);
+function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFloor();
     
@@ -34,8 +35,9 @@ function draw(dino) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    let dino = new Dino(ctx, startingPositionY);
-    draw();
+    
+    
+    draw(dino, cactus);
     document.addEventListener('keydown', (e)=>{
         e.preventDefault();
         if (e.code == 'Space') {
@@ -43,4 +45,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-/* let cactus = new Cactus(startingPositionY, playingFieldWidth); */
