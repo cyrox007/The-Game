@@ -13,18 +13,46 @@
             padding: 0;
             margin: 0;
         }
+        body {
+            display: flex;
+            justify-content: center;
+        }
         canvas {
             background: #eee;
-            display: block;
+            display: none;
             margin: 0 auto;
+            background-image: url(/img/bg.jpg);
+        }
+        canvas.active {
+            display: block;
         }
         img {
             display: none;
         }
+        main {
+            margin: 0 auto;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            background: #eee;
+        }
+        main.active {
+            display: flex;
+        }
+        .loss {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
-    <canvas id="myCanvas"></canvas>
+    <!-- <main class="active">
+        <h1>Игра в динозаврика</h1>
+        <button>Старт</button>
+        <p class="info"></p>
+    </main> -->
+    <canvas id="myCanvas" class="active"></canvas>
     <img id="dino" src="/img/dino.webp">
     <img id="cactus" src="/img/cactus.webp">
     <img id="meteorite" src="/img/meteorite.webp">
