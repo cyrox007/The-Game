@@ -32,7 +32,7 @@ user = {
 
 function soudtracks() {
     let soundtrack = document.createElement('audio');
-    soundtrack.setAttribute('src', '/audio/track-1.mp3');
+    soundtrack.setAttribute('src', 'audio/track-1.mp3');
     document.querySelector('body').prepend(soundtrack);
     return soundtrack;
 }
@@ -170,7 +170,7 @@ setTimeout(() => {
 }, randomInterval(presetTime));
 
 setInterval(() => {
-    let arr = document.querySelectorAll('audio[src="/audio/17-beam.mp3"]');
+    let arr = document.querySelectorAll('audio[src="audio/17-beam.mp3"]');
     if (arr.length > 1) {
         arr.forEach(el=>{
             el.remove();
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e)=>{
         e.preventDefault();
         let jsound = document.createElement('audio');
-        jsound.setAttribute('src', '/audio/17-beam.mp3');
+        jsound.setAttribute('src', 'audio/17-beam.mp3');
         document.querySelector('body').prepend(jsound);
         if (e.code == 'Space') {
             dinoJumpPress = true;
