@@ -5,54 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Game</title>
-    <style>
-        html {
-            overflow-x: hidden;
-        }
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-        }
-        canvas {
-            background: #eee;
-            display: none;
-            margin: 0 auto;
-            background-image: url(/img/bg.jpg);
-        }
-        canvas.active {
-            display: block;
-        }
-        img {
-            display: none;
-        }
-        main {
-            margin: 0 auto;
-            padding: 20px;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            background: #eee;
-        }
-        main.active {
-            display: flex;
-        }
-        .loss {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- <main class="active">
+    <main class="active">
         <h1>Игра в динозаврика</h1>
         <button>Старт</button>
         <p class="info"></p>
-    </main> -->
-    <canvas id="myCanvas" class="active"></canvas>
+    </main>
+    <canvas id="myCanvas" class=""></canvas>
     <img id="dino" src="/img/dino.webp">
     <img id="cactus" src="/img/cactus.webp">
     <img id="meteorite" src="/img/meteorite.webp">

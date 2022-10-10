@@ -22,6 +22,9 @@ let timestart = date.getTime();
 
 let score = 0;
 
+let over = false;
+let attempts = 0;
+
 function soudtracks() {
     let soundtrack = document.createElement('audio');
     soundtrack.setAttribute('src', '/audio/track-1.mp3');
@@ -72,10 +75,16 @@ function generateMeteorite() {
 }
 
 function scoreDraw() {
+    if (sessionStorage.getItem('score') != null) {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = "#0095DD";
+        score++;
+        ctx.fillText("Ваш последний показатель: " + sessionStorage.getItem('score'), 8, 40);
+    }
     ctx.font = '16px Arial';
     ctx.fillStyle = "#0095DD";
     score++;
-    ctx.fillText("Score: "+score, 8, 20)
+    ctx.fillText("Score: "+score, 8, 20);
 }
 
 function gameOver() {
@@ -83,15 +92,17 @@ function gameOver() {
         if (dino.dinoPositionX+(dino.dinoWidth) >= cactus.x+(cactus.cactusWidth/2) &&
             dino.dinoPositionX <= cactus.x+(cactus.cactusWidth) &&
             (dino.dinoPositionY-dino.dinoJumpHeight) >= cactus.y-(cactus.cactusHeight/2)) {
+            
             sound.pause();
-
+            over = true;
             let blockloss = document.createElement('div');
             let btnRetry = document.createElement('button');
             let info = document.createElement('p');
             btnRetry.innerText = "Заново";
             blockloss.appendChild(info);
             blockloss.appendChild(btnRetry);
-            info.innerText = score;
+            info.innerText = 'Ваш счет: '+score;
+            sessionStorage.setItem('score', score);
             blockloss.classList.add('loss');
             document.querySelector('body').appendChild(blockloss);
             canvas.classList.remove('active');
@@ -104,6 +115,9 @@ function gameOver() {
 }
 
 function draw() {
+    if (over) {
+        return;
+    }
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFloor();
@@ -135,8 +149,22 @@ setTimeout(() => {
     generateMeteorite();
 }, randomInterval(presetTime));
 
+setInterval(() => {
+    let arr = document.querySelectorAll('audio[src="/audio/17-beam.mp3"]');
+    if (arr.length > 1) {
+        arr.forEach(el=>{
+            el.remove();
+        });
+    }
+}, 1000);
+
 document.addEventListener('DOMContentLoaded', () => {
-    draw();
+    let main = document.querySelector('main');
+    main.querySelector('button').addEventListener('click', () => {
+        main.classList.toggle('active');
+        document.querySelector('canvas').classList.toggle('active');
+        draw();
+    });
     document.addEventListener('keydown', (e)=>{
         e.preventDefault();
         let jsound = document.createElement('audio');
@@ -144,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('body').prepend(jsound);
         if (e.code == 'Space') {
             dinoJumpPress = true;
+            jsound.play();
         }
     });
 });
