@@ -13,7 +13,7 @@ canvas {
     background: #eee;
     display: none;
     margin: 0 auto;
-    /* background-image: url(/img/bg.jpg); */
+    background-image: url(/img/bg.jpg);
 }
 canvas.active {
     display: block;
@@ -23,25 +23,47 @@ img {
 }
 main {
     margin: 0 auto;
+    margin-top: 20px;
     padding: 20px;
     display: none;
     flex-direction: column;
     justify-content: center;
-    background: #eee;
+    background: #989BA4;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #28406E;
+    border-radius: 3px;
 }
+button {
+    cursor: pointer;
+    margin-top: 15px;
+    padding: 10px 0px;
+    background: #B2979A;
+    border: 1px solid #93819B;
+    border-radius: 3px;
+    color: #F9F7F7;
+    font-weight: 600;
+    font-size: 20px;
+    transition: all .2s ease-in;
+}
+button:hover {
+    background: #28406E;
+}
+
 main.active {
     display: flex;
 }
 .loss {
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #eee;
-    padding: 20px;
-    font-size: 20px;
-    font-family: 'Arial';
+    background: #989BA4;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #28406E;
+    border-radius: 3px;
 }
-.loss button {
-    margin-top: 10px;
-    padding: 10px;
+p {
+    font-size: 20px;
 }

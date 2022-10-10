@@ -12,9 +12,9 @@ class Dino {
 
         this.drawDino = function () {
             let dino = document.getElementById('dino');
-            this.ctx.beginPath();
-            this.ctx.drawImage(dino, this.dinoPositionX, this.dinoPositionY-this.dinoJumpHeight, this.dinoWidth, this.dinoHeight);
-            this.ctx.closePath();
+            ctx.save();
+            ctx.drawImage(dino, this.dinoPositionX, this.dinoPositionY-this.dinoJumpHeight, this.dinoWidth, this.dinoHeight);
+            ctx.restore();
         }
         
         this.dinoControll = function (flag) {

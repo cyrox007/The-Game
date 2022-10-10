@@ -6,8 +6,8 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.outerWidth / 100 * 75;
 canvas.height = window.outerHeight / 100 * 90;
 
-let playingFieldWidth = canvas.clientWidth;
-let playingFieldHeight = canvas.clientHeight;
+let playingFieldWidth = canvas.width;
+let playingFieldHeight = canvas.height;
 let floorHeight = 20;
 
 let startingPositionY = playingFieldHeight - floorHeight-80;
@@ -23,7 +23,12 @@ let timestart = date.getTime();
 let score = 0;
 
 let over = false;
-let attempts = 0;
+let user = {};
+user = {
+    attempts: sessionStorage.getItem('attempts'),
+    lastResult: sessionStorage.getItem('score'),
+    bestResult: Number(sessionStorage.getItem('bestScore')),
+};
 
 function soudtracks() {
     let soundtrack = document.createElement('audio');
@@ -35,11 +40,11 @@ function soudtracks() {
 let sound = soudtracks();
 
 function drawFloor() {
-    ctx.beginPath();
+    ctx.save();
     ctx.rect(0, playingFieldHeight - floorHeight, playingFieldWidth, floorHeight);
     ctx.fillStyle = '#D58A2A';
     ctx.fill();
-    ctx.closePath();
+    ctx.restore();
 }
 
 let dino = new Dino(ctx, startingPositionY);
@@ -75,11 +80,18 @@ function generateMeteorite() {
 }
 
 function scoreDraw() {
-    if (sessionStorage.getItem('score') != null) {
+    if (user.lastResult != null) {
         ctx.font = '16px Arial';
         ctx.fillStyle = "#0095DD";
         score++;
-        ctx.fillText("Ваш последний показатель: " + sessionStorage.getItem('score'), 8, 40);
+        ctx.fillText("Ваш последний показатель: " + user.lastResult, 8, 40);
+    }
+    if (user.bestResult != null) {
+        
+        ctx.font = '16px Arial';
+        ctx.fillStyle = "#0095DD";
+        score++;
+        ctx.fillText("Ваш лучший показатель: " + user.bestResult, 8, 60);
     }
     ctx.font = '16px Arial';
     ctx.fillStyle = "#0095DD";
@@ -92,17 +104,25 @@ function gameOver() {
         if (dino.dinoPositionX+(dino.dinoWidth) >= cactus.x+(cactus.cactusWidth/2) &&
             dino.dinoPositionX <= cactus.x+(cactus.cactusWidth) &&
             (dino.dinoPositionY-dino.dinoJumpHeight) >= cactus.y-(cactus.cactusHeight/2)) {
-            
             sound.pause();
             over = true;
             let blockloss = document.createElement('div');
             let btnRetry = document.createElement('button');
             let info = document.createElement('p');
+            let bestScoreInfo = document.createElement('p');
             btnRetry.innerText = "Заново";
             blockloss.appendChild(info);
+            blockloss.appendChild(bestScoreInfo);
             blockloss.appendChild(btnRetry);
             info.innerText = 'Ваш счет: '+score;
+            if (score > user.bestResult) {
+                sessionStorage.setItem('bestScore', score);
+            }
+            if (user.bestResult != null) {
+                bestScoreInfo.innerText = 'Лучший результат: '+user.bestResult;
+            }
             sessionStorage.setItem('score', score);
+            
             blockloss.classList.add('loss');
             document.querySelector('body').appendChild(blockloss);
             canvas.classList.remove('active');
@@ -164,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         main.classList.toggle('active');
         document.querySelector('canvas').classList.toggle('active');
         draw();
+        sound.play();
     });
     document.addEventListener('keydown', (e)=>{
         e.preventDefault();
