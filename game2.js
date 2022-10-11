@@ -4,7 +4,7 @@ let ctx = canvas.getContext('2d');
 
 /* задаем размеры игрового поля */
 canvas.width = window.outerWidth / 100 * 75;
-canvas.height = window.outerHeight / 100 * 90;
+canvas.height = window.outerHeight / 100 * 80;
 
 let playingFieldWidth = canvas.width;
 let playingFieldHeight = canvas.height;
