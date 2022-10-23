@@ -68,7 +68,6 @@ function generateCactus() {
     let timeDelay = randomInterval(presetTime);
     cacti.push(new Cactus(canvas, ctx, enemySpeed));
     setTimeout(generateCactus, timeDelay);
-    console.log(cacti);
 }
 
 let meteorites = [];
@@ -76,7 +75,6 @@ function generateMeteorite() {
     let timeDelay = randomInterval(presetTime);
     meteorites.push(new Meteorite(canvas, ctx, enemySpeed));
     setTimeout(generateMeteorite, timeDelay);
-    console.log(meteorites);
 }
 
 function scoreDraw() {
@@ -129,15 +127,15 @@ function gameOver() {
             btnRetry.addEventListener('click', (e) => {
                 window.location.reload();
             });
+            return;
         }
     });
-    
 }
 
 function draw() {
-    if (over) {
+    if (over)
         return;
-    }
+    
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFloor();
@@ -197,4 +195,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-

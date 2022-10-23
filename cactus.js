@@ -2,11 +2,12 @@ class Cactus {
     constructor (canvas, ctx, speed) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.x = canvas.width;
-        this.y = 530+55;
         this.cactusWidth = 20;
         this.cactusHeight = 60;
         this.cactusMoving = 0;
+        this.x = canvas.width;
+        this.y = canvas.height-this.cactusHeight-20;
+        
         this.slideSpeed = speed;
     }
     cactusDraw() {
@@ -16,14 +17,8 @@ class Cactus {
         ctx.restore();
     }
 
-    cactusSpawn() {
-        if (this.cactusMoving >= this.canvas.clientWidth+20) {
-            this.cactusMoving = 0;
-        }
-        this.cactusDraw();
-    }
     slide() {
-        this.cactusSpawn();
+        this.cactusDraw();
         this.x -= this.slideSpeed;
     }
 }
