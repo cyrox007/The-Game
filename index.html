@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Game</title>
+    <meta name="description" content="The-Game — архив двух учебных браузерных игр на JavaScript и Canvas.">
+    <title>The-Game — учебные браузерные эксперименты</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <main class="active">
-        <h1>Игра в динозаврика</h1>
-        <button>Старт</button>
-        <p class="info"></p>
+<body class="game-hub-body">
+    <main class="game-hub">
+        <span class="game-hub__eyebrow">Учебный проект · 2022</span>
+        <h1>The-Game</h1>
+        <p class="game-hub__lead">
+            Два небольших браузерных эксперимента на чистом JavaScript и Canvas,
+            сохранённые как часть истории обучения.
+        </p>
+
+        <div class="game-hub__grid">
+            <article class="game-card">
+                <span class="game-card__tag">Canvas · runner</span>
+                <h2>Dino</h2>
+                <p>Динозаврик, препятствия, прыжок, счёт и лучший результат в рамках браузерной сессии.</p>
+                <a class="game-card__action" href="dino.html">Играть →</a>
+            </article>
+
+            <article class="game-card">
+                <span class="game-card__tag">Canvas · breakout</span>
+                <h2>Breakout</h2>
+                <p>Ранний вариант аркады с мячом, платформой, кирпичами, жизнями и подсчётом очков.</p>
+                <a class="game-card__action" href="breakout.html">Играть →</a>
+            </article>
+        </div>
+
+        <p class="game-hub__note">
+            Это не production-игры и не пример текущей архитектуры. Репозиторий оставлен публичным как учебный архив,
+            а live-demo получил только аккуратный технический cleanup.
+        </p>
     </main>
-    <canvas id="myCanvas" class=""></canvas>
-    <img id="dino" src="img/dino.webp">
-    <img id="cactus" src="img/cactus.webp">
-    <img id="meteorite" src="img/meteorite.webp">
-    <script src="cactus.js"></script>
-    <script src="dino.js"></script>
-    <script src="game2.js"></script>
 </body>
 </html>

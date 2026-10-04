@@ -1,71 +1,203 @@
 html {
     overflow-x: hidden;
 }
+
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
+
 body {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: #f4f1ea;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2D3E44;
 }
+
 canvas {
-    background: #eee;
+    background-color: #eee;
     display: none;
-    margin: 0 auto;
+    margin: 56px auto 0;
+    max-width: min(100%, 960px);
     background-image: url(img/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(45, 62, 68, 0.18);
 }
+
 canvas.active {
     display: block;
 }
+
 img {
     display: none;
 }
+
 main {
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 20px;
+    margin: 56px auto 0;
+    padding: 24px;
     display: none;
     flex-direction: column;
     justify-content: center;
-    background: #989BA4;
-    font-family: Arial, Helvetica, sans-serif;
+    gap: 12px;
+    background: #ffffff;
     color: #28406E;
-    border-radius: 3px;
-}
-button {
-    cursor: pointer;
-    margin-top: 15px;
-    padding: 10px 0px;
-    background: #B2979A;
-    border: 1px solid #93819B;
-    border-radius: 3px;
-    color: #F9F7F7;
-    font-weight: 600;
-    font-size: 20px;
-    transition: all .2s ease-in;
-}
-button:hover {
-    background: #28406E;
+    border: 1px solid rgba(45, 62, 68, 0.1);
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(45, 62, 68, 0.12);
 }
 
 main.active {
     display: flex;
 }
+
+button,
+.game-card__action {
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 12px 16px;
+    background: #28406E;
+    border: 1px solid #28406E;
+    border-radius: 10px;
+    color: #F9F7F7;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform .2s ease, background .2s ease;
+}
+
+button:hover,
+.game-card__action:hover {
+    background: #1e3155;
+    transform: translateY(-1px);
+}
+
 .loss {
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 20px;
+    margin: 56px auto 0;
+    padding: 24px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
     justify-content: center;
-    background: #989BA4;
-    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
     color: #28406E;
-    border-radius: 3px;
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(45, 62, 68, 0.12);
 }
+
 p {
-    font-size: 20px;
+    line-height: 1.55;
+}
+
+.game-back {
+    position: fixed;
+    top: 18px;
+    left: 20px;
+    z-index: 10;
+    color: #28406E;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.game-hub-body {
+    align-items: center;
+}
+
+.game-hub {
+    display: flex;
+    width: min(980px, 100%);
+    margin: 20px auto;
+    padding: clamp(24px, 5vw, 56px);
+    background: #fff;
+}
+
+.game-hub__eyebrow,
+.game-card__tag {
+    color: #9F775A;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.game-hub h1 {
+    font-size: clamp(42px, 8vw, 80px);
+    line-height: .95;
+    color: #2D3E44;
+}
+
+.game-hub__lead {
+    max-width: 700px;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: #59686d;
+}
+
+.game-hub__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    min-height: 260px;
+    background: #f7f5ef;
+    border: 1px solid rgba(45, 62, 68, 0.1);
+    border-radius: 16px;
+}
+
+.game-card h2 {
+    font-size: 34px;
+    color: #2D3E44;
+}
+
+.game-card p {
+    flex: 1;
+    color: #59686d;
+}
+
+.game-card__action {
+    align-self: flex-start;
+}
+
+.game-hub__note {
+    margin-top: 14px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(45, 62, 68, 0.1);
+    color: #738084;
+    font-size: 14px;
+}
+
+.breakout-canvas {
+    width: min(92vw, 720px);
+    height: auto;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding: 14px;
+    }
+
+    .game-hub__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-card {
+        min-height: 220px;
+    }
+
+    canvas {
+        margin-top: 64px;
+    }
 }
